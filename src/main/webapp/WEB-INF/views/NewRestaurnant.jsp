@@ -15,5 +15,6 @@
 		Category:<input type="text" name="category"/><br><br>
 		<input type="submit" value="Save Restaurant"/>
 	</form>
+	
 </body>
 </html>
