@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,9 +28,19 @@ public class NewRestaurnant {
 	}
 
 	@PostMapping("/saverestaurant")
-	public String saveRestaurant(RestaurantEntity restaurantEntity) {
-		restaurnantRepository.save(restaurantEntity);
-		return "Success";
+	public String saveRestaurant(@Validated RestaurantEntity restaurantEntity,BindingResult result,Model model) {
+		//validation
+		if(result.hasErrors()) {
+			//System.out.println(result.getAllErrors());
+			model.addAttribute("result",result);
+			return "NewRestaurnant";
+		}
+		else {
+			restaurnantRepository.save(restaurantEntity);
+			//System.out.println(restaurantEntity.getName());
+			model.addAttribute("restaurantEntity",restaurantEntity);
+			return "redirect:/restaurants";
+		}
 	}
 	
 	@GetMapping("/restaurants")
