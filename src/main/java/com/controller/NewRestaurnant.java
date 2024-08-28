@@ -44,7 +44,7 @@ public class NewRestaurnant {
 	}
 	
 	@GetMapping("/restaurants")
-	public String listRestaurants(Model model) {
+	public String listRestaurants(Model model) { 
 		List<RestaurantEntity> restaurants = restaurnantRepository.findAll();
 		model.addAttribute("restaurants", restaurants);
 		return "ListRestaurants";
