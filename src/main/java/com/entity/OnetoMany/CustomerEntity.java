@@ -19,7 +19,7 @@ public class CustomerEntity {
 	String firstName;
 	String gender;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "customerEntity")
 	List<OrderEntity> orderEntities;
 	
 	public Integer getCustomerId() {
